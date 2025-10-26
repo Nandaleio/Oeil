@@ -1,0 +1,49 @@
+<fieldset role="group">
+        <input type="text" placeholder="">
+        <button outline>
+            <i data-lucide="search"></i>
+        </button>
+</fieldset>
+
+<table style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Reference</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody x-data="{ posts: [] }" x-init="posts = await getNextProcedures()" id="proceduresList">
+        <template x-for="(value, index) in posts">
+            <tr>
+                <td x-text="reference"></td>
+                <td x-text="title"></td>
+                <td><kbd x-text=""></kbd></td>
+                <td>
+                    <button>
+                        <i data-lucide="book-open"></i>
+                    </button>
+                </td>
+            </tr>
+        </template>
+
+    </tbody>
+</table>
+
+<script>
+async function getNextProcedures() {
+    const proceduresList = document.getElementById('proceduresList');
+    const offset = proceduresList.children.length;
+    const rep = await fetch(`https://data.europarl.europa.eu/api/v2/procedures?format=application%2Fld%2Bjson&offset=${offset}&limit=50`, {
+        method: "GET",
+        headers: {
+            "Access-Control-Allow-Origin": "*"
+        },
+    });
+    const json = await rep.json();
+    console.log(json);
+
+    return json;
+}
+</script>

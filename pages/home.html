@@ -1,0 +1,52 @@
+
+<style>
+
+.info-article {
+    background-color:var(--muted);
+    display: flex; flex-direction: column; align-items: center;
+}
+
+.split {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+</style>
+
+<div hx-target="#main-content" hx-indicator="#indicator" hx-swap="innerHTML transition:true">
+
+
+<h1>Legislative Observatory</h1>
+
+<article class="info-article">
+    <p>Welcome to the European Parliament’s database for monitoring the EU decision-making process.</p>
+    <p>Please explore the various features of the site such as the part-session calendar, search functions, procedure records with links to documentation and summaries of main documents.</p>
+    <p>For more detailed information about the Legislative Observatory, click on Find out more.</p>
+    <button hx-get="/search.html">Search the database</button>
+</article>
+
+<h2>Part-sessions</h2>
+<div class="split">
+    <div>
+        <h2>20 - 26 October</h2>
+        <small>Strasbourg</small>
+    </div>
+    <div>
+        <fieldset role="group">
+            <button outline><i data-lucide="chevron-left"></i></button>
+            <span style="border: var(--border);border-right: 0;display: flex;align-items: center;gap: 0.5rem;padding: 0.5rem;">Other part-sessions/sittings <i data-lucide="calendar"> </i></span>
+            <button outline><i data-lucide="chevron-right"></i></button>
+            
+
+        </fieldset>
+    </div>
+</div>
+<table style="width: 100%;">
+            <tr>
+                <td>Monday 20 October 2025</td>
+                <td>Debate in Parliament (6)</td>
+            </tr>
+</table>
+
+
+</div>

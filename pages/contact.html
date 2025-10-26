@@ -1,0 +1,32 @@
+
+<style>
+    .contact-article {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .field-input {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+</style>
+
+<article class="contact-article">
+    <form action="">
+        <label class="field-input">
+            email
+            <input type="email" required>
+        </label>
+
+        <label class="field-input">
+            message
+            <textarea required></textarea>
+        </label>
+
+        <button style="max-width: 7rem;display: flex;justify-content: space-around;">
+            Send
+            <i data-lucide="send"></i>
+        </button>
+    </form>
+</article>

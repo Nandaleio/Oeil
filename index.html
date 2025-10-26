@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>👁 Oeil</title>
+
+    <script defer src="scripts/alpinejs.min.js"></script>
+    <link rel="stylesheet" href="css/shadcn-classless.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <aside role="navigation" id="sidebar" class="sidebar-open" hx-target="#main-content" hx-indicator="#indicator" hx-swap="innerHTML transition:true">
+
+            <header>
+              <div class="sidebar-header" hx-get="/home.html">
+                <i data-lucide="eye"></i>
+                <span>
+                  <h6 style="margin-bottom: 0;">Legislative Observatory</h6>
+                  <small>European Parliament</small>
+                </span>
+              </div>
+            </header>
+
+            <main >
+              <small>Legislative:</small>
+              <div class="sidenav-links">
+                <button ghost href="#" hx-get="/home.html">Sessions</button>
+                <button ghost href="#" hx-get="/search.html">Search</button>
+                <button ghost href="#" hx-get="/priorities.html">Priorities</button>
+              </div>
+
+              <small>About:</small>
+              <div class="sidenav-links">
+                <button ghost href="#" hx-get="/findout.html">Find out more</button>
+                <button ghost href="#" hx-get="/contact.html">Contact us</button>
+              </div>
+            </main>
+
+            <footer style="display: flex;justify-content: center;">
+              <button ghost>
+                <i data-lucide="globe"></i>
+              </button>
+            </footer>
+
+          </aside>
+          
+          <div class="sidenav-content">
+            <nav breadcrumb="&gt;" id="breadcrumb">
+              <a href="#" onclick="toggleSideBar()" style="display: flex; align-items: center;">
+                <i data-lucide="panel-left"></i>
+              </a>
+            </nav>
+
+            <div id="main-content" hx-get="/pages/home.html" hx-trigger="load">
+
+            </div>
+
+            <div id="indicator">
+                <div skeleton style="width: 100%; height: 60%;"></div>
+                <div skeleton style="width: 100%; height: 30%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <script src="scripts/lucide.js"></script>
+        <script src="scripts/htmx.min.js"></script>
+        <script src="scripts/script.js"></script>
+</body>
+</html>
