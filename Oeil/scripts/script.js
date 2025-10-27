@@ -8,7 +8,7 @@ htmx.on('htmx:afterSwap', (event) => {
 
 
 htmx.on('htmx:configRequest', (evt) => {
-  evt.detail.path = '/pages' + evt.detail.path;
+  evt.detail.path = '/Oeil/pages' + evt.detail.path;
 });
 
 // --- SIDEBAR --- //
