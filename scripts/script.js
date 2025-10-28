@@ -25,6 +25,14 @@ document.addEventListener("alpine:mutated", (e) => {
     translator.translateDOM(e.target);
 });
 
+//to process tranlator added html fro htmx/alpineJS & lucideicon
+document.addEventListener('eo-translator:translateDom', (e) => {
+    htmx.process(e.target);
+    lucide.createIcons();
+    Alpine.flushAndStopDeferringMutations?.();
+    Alpine.initTree(e.target);
+});
+
 // Every pages are going to be in the /pages folder
 htmx.on('htmx:configRequest', (evt) => {
   evt.detail.path = '/Oeil/pages' + evt.detail.path;
