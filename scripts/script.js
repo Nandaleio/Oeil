@@ -1,37 +1,53 @@
 lucide.createIcons();
 
-htmx.on('htmx:afterSwap', (event) => {
+
+// --- Translation ---
+const dict = {en, fr};
+var translator = new EOTranslator(dict);
+function changeLanguage(lang) {
+    translator.language = lang;
+    translator.translateDOM();
+}
+translator.translateDOM();
+
+//After each page change reload Lucide icons, AlpineJS & EOTranslator
+htmx.on('htmx:afterSwap', (e) => {
     Alpine.flushAndStopDeferringMutations?.();
-    Alpine.initTree(event.target);
+    Alpine.initTree(e.target);
     lucide.createIcons();
+    translator.translateDOM(e.target);
 });
 
+//to process alpineJS generated element for HTMX
+document.addEventListener("alpine:mutated", (e) => {
+    htmx.process(e.target);
+    lucide.createIcons();
+    translator.translateDOM(e.target);
+});
 
+// Every pages are going to be in the /pages folder
 htmx.on('htmx:configRequest', (evt) => {
-  evt.detail.path = '/pages' + evt.detail.path;
+  evt.detail.path = '/Oeil/pages' + evt.detail.path;
 });
 
 // --- SIDEBAR --- //
 const sidebar = document.getElementById('sidebar');
-
 sidebar.addEventListener('click', () => {
     if(sidebar.classList.contains('sidebar-close')) toggleSideBar();
 })
-
 function toggleSideBar() {
     sidebar.classList.toggle('sidebar-open');
     sidebar.classList.toggle('sidebar-close');
 }
 
-
 // --- BREADCRUMB --- //
 const breadcrumb = document.getElementById('breadcrumb');
 const labels = {
-    "home": "Sessions",
-    "search": "Search",
-    "priorities": "Priorities",
-    "findout": "Find out more",
-    "contact": "Contact us"
+    "home": "sidebar.home",
+    "search": "sidebar.search",
+    "priorities": "sidebar.priorities",
+    "findout": "sidebar.findoutmore",
+    "contact": "sidebar.contact"
 }
 htmx.on('htmx:afterRequest', (e) => {
 
@@ -41,7 +57,8 @@ htmx.on('htmx:afterRequest', (e) => {
 
     const a = document.createElement('a');
     a.setAttribute('href', path);
-    a.text = labels[page] || page;
+    a.setAttribute('eo-translator', labels[page])
+    a.text = translator.translate(labels[page]) || page;
 
     if(breadcrumb.children.length >= 2) {
         breadcrumb.removeChild(breadcrumb.lastChild);

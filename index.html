@@ -9,38 +9,44 @@
     <link rel="stylesheet" href="css/shadcn-classless.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body x-data="{ open: false }">
     <aside role="navigation" id="sidebar" class="sidebar-open" hx-target="#main-content" hx-indicator="#indicator" hx-swap="innerHTML transition:true">
-
             <header>
               <div class="sidebar-header" hx-get="/home.html">
                 <i data-lucide="eye"></i>
                 <span>
-                  <h6 style="margin-bottom: 0;">Legislative Observatory</h6>
-                  <small>European Parliament</small>
+                  <h6 style="margin-bottom: 0;" eo-translator="sidebar.title">Legislative Observatory</h6>
+                  <small eo-translator="sidebar.subtitle">European Parliament</small>
+                  <span	></span>
                 </span>
               </div>
             </header>
 
             <main >
-              <small>Legislative:</small>
+              <small eo-translator="sidebar.legislative">Legislative:</small>
               <div class="sidenav-links">
-                <button ghost href="#" hx-get="/home.html">Sessions</button>
-                <button ghost href="#" hx-get="/search.html">Search</button>
-                <button ghost href="#" hx-get="/priorities.html">Priorities</button>
+                <button ghost href="#" hx-get="/home.html" eo-translator="sidebar.home">Sessions</button>
+                <button ghost href="#" hx-get="/search.html" eo-translator="sidebar.search">Search</button>
+                <button ghost href="#" hx-get="/priorities.html" eo-translator="sidebar.priorities">Priorities</button>
               </div>
 
-              <small>About:</small>
+              <small eo-translator="sidebar.about">About:</small>
               <div class="sidenav-links">
-                <button ghost href="#" hx-get="/findout.html">Find out more</button>
-                <button ghost href="#" hx-get="/contact.html">Contact us</button>
+                <button ghost href="#" hx-get="/findout.html" eo-translator="sidebar.findoutmore">Find out more</button>
+                <button ghost href="#" hx-get="/contact.html" eo-translator="sidebar.contact">Contact us</button>
               </div>
             </main>
 
             <footer style="display: flex;justify-content: center;">
-              <button ghost>
+
+              <button ghost popovertarget="language-popover">
                 <i data-lucide="globe"></i>
               </button>
+              <div popover id="language-popover" style="gap: 0.5rem;">
+                <button outline onclick="changeLanguage('en')">EN</button>
+                <button outline onclick="changeLanguage('fr')">FR</button>
+              </div>
+
             </footer>
 
           </aside>
@@ -65,6 +71,9 @@
 
         <script src="scripts/lucide.js"></script>
         <script src="scripts/htmx.min.js"></script>
+        <script src="scripts/fr.js"></script>
+        <script src="scripts/en.js"></script>
+        <script src="scripts/translator.min.js"></script>
         <script src="scripts/script.js"></script>
 </body>
 </html>
